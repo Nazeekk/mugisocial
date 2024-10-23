@@ -88,7 +88,7 @@ router.post("/register", async (req, res) => {
       },
     });
 
-    const verificationUrl = `http://192.168.0.106:3000/verify-email?token=${user.verificationToken}`;
+    const verificationUrl = `https://mugisocial.onrender.com/verify-email?token=${user.verificationToken}`;
 
     const mailOptions = {
       from: process.env.SMTP_USER,
@@ -99,7 +99,7 @@ router.post("/register", async (req, res) => {
 
     await transporter.sendMail(mailOptions);
 
-    res.status(201).json({ message: "User registered successfully" });
+    res.status(201).json({ message: "Користувач успішно зареєстрований" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

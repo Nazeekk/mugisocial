@@ -420,7 +420,7 @@ router.post("/forgot-password", async (req, res) => {
     await user.save();
 
     // Відправляємо email з посиланням для скидання
-    const resetUrl = `http://192.168.0.106/reset-password/${resetToken}`;
+    const resetUrl = `https://mugisocial.onrender.com/reset-password/${resetToken}`;
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_PORT,
