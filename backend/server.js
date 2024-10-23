@@ -150,6 +150,6 @@ app.get("*", (req, res) => {
 });
 
 // Запуск сервера
-server.listen(PORT, '0.0.0.0', () => {
+server.listen(PORT, 'https://mugisocial.onrender.com', () => {
   console.log(`Server is running on ${process.env.SERVER}:${PORT}`);
 });
