@@ -8,14 +8,14 @@ const postRoutes = require("./routes/postRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 const chatRoomRoutes = require("./routes/chatRoomRoutes");
 const authRoutes = require("./routes/authRoutes");
-const https = require("https");
+const http = require("http");
 const socketIo = require("socket.io");
 const crypto = require("crypto");
 const Message = require("./models/Message");
 
 require("dotenv").config();
 const app = express();
-const server = https.createServer(app);
+const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
     origin: "https://mugisocial.onrender.com", // Дозволяє підключення з вашого фронтенду
@@ -23,7 +23,7 @@ const io = socketIo(server, {
     credentials: true,
   },
 });
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 4000;
 
 // Middleware
 app.use(
@@ -150,6 +150,6 @@ app.get("*", (req, res) => {
 });
 
 // Запуск сервера
-server.listen(PORT, "mugisocial.onrender.com", () => {
+server.listen(PORT, () => {
   console.log(`Server is running on ${process.env.SERVER}:${PORT}`);
 });
