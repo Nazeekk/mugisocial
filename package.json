@@ -1,0 +1,9 @@
+{
+  "name": "mugisocial-react",
+  "version": "1.0.0",
+  "description": "Social media application built with React and Express",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build",
+    "start": "node backend/server.js"
+  }
+}
