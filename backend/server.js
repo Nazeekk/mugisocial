@@ -151,5 +151,5 @@ app.get("*", (req, res) => {
 
 // Запуск сервера
 server.listen(PORT, () => {
-  console.log(`Server is running on ${process.env.SERVER}`);
+  console.log(`Server is running on ${process.env.SERVER}:${PORT}`);
 });
