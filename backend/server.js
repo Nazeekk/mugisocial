@@ -18,17 +18,17 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: "https://mugisocial.onrender.com", // Дозволяє підключення з вашого фронтенду
+    origin: "http://192.168.0.106:3000", // Дозволяє підключення з вашого фронтенду
     methods: ["GET", "POST"],
     credentials: true,
   },
 });
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(
   cors({
-    origin: "https://mugisocial.onrender.com", // Дозволяє запити з вашого фронтенду
+    origin: "http://192.168.0.106:3000", // Дозволяє запити з вашого фронтенду
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     credentials: true, // Дозволяє відправляти кукі і токени
   })
@@ -39,8 +39,8 @@ app.use(bodyParser.json());
 // Підключення до MongoDB
 connectDB();
 
-app.use("/images", express.static("public/images"));
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+// app.use("/images", express.static("public/images"));
+// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Маршрути
 app.use("/api/users", userRoutes);
@@ -144,10 +144,10 @@ io.on("connection", (socket) => {
   });
 });
 
-app.use(express.static(path.join(__dirname, "../frontend/build")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
-});
+// app.use(express.static(path.join(__dirname, "../frontend/build")));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+// });
 
 // Запуск сервера
 server.listen(PORT, () => {

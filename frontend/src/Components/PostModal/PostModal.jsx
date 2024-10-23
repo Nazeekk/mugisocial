@@ -82,7 +82,7 @@ const PostModal = ({ post, onClose }) => {
           </button>
           <div className="post_info">
             <div className="post_profile-icon">
-              <img src={BASE_URL + post.userId.avatar} alt="avatar" />
+              <img src={post.userId.avatar} alt="avatar" />
             </div>
             <h4 className="post_username">{post.userId.userName}</h4>
           </div>
@@ -103,7 +103,7 @@ const PostModal = ({ post, onClose }) => {
               <div key={comment._id} className="comment">
                 <div className="comment_user-info">
                   <div className="comment_profile-icon">
-                    <img src={BASE_URL + comment.userId.avatar} alt="avatar" />
+                    <img src={comment.userId.avatar} alt="avatar" />
                   </div>
                   <div className="comment_user-info_content">
                     <h4>{comment.userId.userName}</h4>

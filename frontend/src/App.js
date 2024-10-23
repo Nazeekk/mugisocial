@@ -9,7 +9,7 @@ import Profile from "./Pages/Profile";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
 import VerifyEmail from "./Pages/VerifyEmail/VerifyEmail";
-import Settings from "./Pages/Settings";
+// import Settings from "./Pages/Settings";
 import UserProfile from "./Pages/UserProfile";
 import ChatRoom from "./Pages/ChatRoom";
 import NotFound from "./Pages/NotFound";

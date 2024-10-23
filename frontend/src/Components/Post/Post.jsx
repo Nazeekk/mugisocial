@@ -93,7 +93,7 @@ const Post = ({ post, fetchPosts }) => {
       <div className="post_header">
         <div className="post_info">
           <div className="post_profile-icon">
-            <img src={BASE_URL + post.userId.avatar} />
+            <img src={post.userId.avatar} />
           </div>
           <div>
             <h3 className="post_username">{post.userId.userName}</h3>

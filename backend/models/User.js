@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema(
     bio: { type: String },
     location: { type: String },
     phone: { type: String },
-    avatar: { type: String, default: "/images/default-avatar.png" }, // Додаємо поле для аватара
+    avatar: { type: String, default: "https://res.cloudinary.com/dczz5rz9n/image/upload/v1729715722/public/images/default-avatar.png" }, // Додаємо поле для аватара
     friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // Масив ID друзів
     friendRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     gallery: { type: [String], default: [] }, // URL фото та відео

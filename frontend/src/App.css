@@ -133,6 +133,12 @@ a {
   height: 345px;
 }
 
+#profile .profile_picture img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
 #profile .profile_info {
   display: flex;
 }

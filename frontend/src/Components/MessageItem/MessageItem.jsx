@@ -4,7 +4,6 @@ import MessageContextMenu from "../MessageContextMenu/MessageContextMenu";
 
 const MessageItem = ({ message, onDelete }) => {
   const userId = localStorage.getItem("userId");
-  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   const [showMenu, setShowMenu] = useState(false);
 
@@ -51,7 +50,7 @@ const MessageItem = ({ message, onDelete }) => {
         <div className="message-content">
           <div className="message-info">
             <div className="message-avatar">
-              <img src={BASE_URL + message.senderId.avatar} alt="" />
+              <img src={message.senderId.avatar} alt="" />
             </div>
           </div>
         </div>

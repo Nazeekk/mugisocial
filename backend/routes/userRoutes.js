@@ -3,13 +3,16 @@ const User = require("../models/User");
 const router = express.Router();
 const auth = require("../middleware/auth");
 const multer = require("multer");
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const path = require("path");
 const fs = require("fs");
-
 const {
   getUserProfile,
   updateUserProfile,
 } = require("../controllers/userController");
+
+require("dotenv").config();
 
 router.get("/users", auth, async (req, res) => {
   const { search = "" } = req.query; // Пошуковий параметр із запиту
@@ -31,21 +34,27 @@ router.get("/me", auth, getUserProfile);
 
 router.put("/me", auth, updateUserProfile);
 
-const avatarStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/avatars"); // Папка, куди будуть зберігатися аватари
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+const avatarStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "avatars", // Папка на Cloudinary
+    format: async (req, file) => "png", // Вказати формат файлу
+    public_id: (req, file) => `${Date.now()}-${file.originalname}`,
   },
 });
 
-const mediaStorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/media"); // Папка, куди буде зберігатись медіа
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
+const mediaStorage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "media", // Папка на Cloudinary
+    format: async (req, file) => "png",
+    public_id: (req, file) => `${Date.now()}-${file.originalname}`,
   },
 });
 
@@ -60,7 +69,8 @@ router.patch(
   async (req, res) => {
     try {
       const userId = req.user.userId; // Отримуємо ID користувача з токена
-      const avatarUrl = `/uploads/avatars/${req.file.filename}`; // URL до збереженого файлу
+
+      const avatarUrl = req.file.path;
 
       // Оновлюємо поле аватара в профілі користувача
       const user = await User.findByIdAndUpdate(
@@ -109,11 +119,12 @@ router.patch(
       }
 
       const userId = req.user.userId;
-      const files = req.files.map((file) => `/uploads/media/${file.filename}`);
+
+      const fileUrls = req.files.map((result) => result.path);
 
       const updatedUser = await User.findByIdAndUpdate(
         userId,
-        { $push: { gallery: { $each: files } } },
+        { $push: { gallery: { $each: fileUrls } } },
         { new: true }
       );
 
@@ -143,13 +154,9 @@ router.delete("/delete-media", auth, async (req, res) => {
     // Видаляємо файл з масиву gallery
     await user.save();
 
-    // Видаляємо файл з файлової системи
-    const filePath = path.join(
-      __dirname,
-      "../uploads/media",
-      path.basename(image)
-    );
-    fs.unlink(filePath, (err) => {
+    // Видалення з Cloudinary
+    const publicId = image.split("/").pop().split(".")[0]; // Отримуємо public_id для файлу
+    cloudinary.uploader.destroy(`media/${publicId}`, (err, result) => {
       if (err) {
         console.error(err);
       }

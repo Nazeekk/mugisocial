@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Gallery from "../Components/Gallery/Gallery";
 import PostsList from "../Components/PostsList/PostsList";
+import { Navigate } from "react-router-dom";
 
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -32,10 +33,13 @@ const Profile = () => {
         });
         setUser(response.data);
       } catch (error) {
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
         console.error(
           "Error fetching user data:",
           error.response ? error.response.data : error.message
         );
+        return <Navigate to="/register" />;
       }
     };
 
@@ -92,11 +96,9 @@ const Profile = () => {
     <div id="profile">
       {!isEditing ? (
         <div className="profile_info">
-          <img
-            src={BASE_URL + user.avatar}
-            alt={user.userName}
-            className="profile_picture"
-          />
+          <div className="profile_picture">
+            <img src={user.avatar} alt={user.userName} />
+          </div>
           <div className="profile_info-content">
             <h3 className="profile_username">{user.userName}</h3>
             <div className="profile_personal">
@@ -118,7 +120,7 @@ const Profile = () => {
         <div className="profile_info">
           <div className="profile_picture-editing">
             <img
-              src={`http://localhost:5000${user.avatar}`}
+              src={user.avatar}
               alt={user.userName}
               className="profile_picture"
             />

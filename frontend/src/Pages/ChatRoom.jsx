@@ -101,7 +101,7 @@ const ChatRoom = () => {
           <Link to={`/profile/${userId}`}>{chatInfo.userName}</Link>
         </div>
         <Link to={`/profile/${userId}`} className="right-part">
-          <img src={BASE_URL + chatInfo.avatar} alt={chatInfo.userName} />
+          <img src={chatInfo.avatar} alt={chatInfo.userName} />
         </Link>
       </div>
       <hr />

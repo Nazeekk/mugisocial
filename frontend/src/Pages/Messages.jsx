@@ -32,7 +32,7 @@ const Messages = () => {
         <Link to={`/chat/${chat._id}`} key={chat._id} className="chat-card">
           <h3>{chat.userName}</h3>
           <div className="chat-card_avatar">
-            <img src={BASE_URL + chat.avatar} alt={chat.userName} />
+            <img src={chat.avatar} alt={chat.userName} />
           </div>
         </Link>
       ))}

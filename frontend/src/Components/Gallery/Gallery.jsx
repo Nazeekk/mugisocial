@@ -121,14 +121,14 @@ const Gallery = ({ userId }) => {
             <div key={index}>
               {item.endsWith(".mp4") ? (
                 <video controls>
-                  <source src={BASE_URL + item} type="video/mp4" />
+                  <source src={item} type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               ) : (
                 <img
                   onClick={() => openModal(item)}
                   className="gallery_item"
-                  src={BASE_URL + item}
+                  src={item}
                   alt={`media-${index}`}
                 />
               )}
@@ -187,7 +187,7 @@ const Gallery = ({ userId }) => {
             }}
           >
             <img
-              src={BASE_URL + selectedImage}
+              src={selectedImage}
               alt="Selected"
               style={{
                 maxWidth: "100%",
@@ -199,21 +199,24 @@ const Gallery = ({ userId }) => {
             />
           </div>
         )}
-        <button
-          onClick={() => handleDelete(selectedImage)}
-          style={{
-            position: "absolute",
-            top: "10px",
-            right: "100px",
-            background: "red",
-            color: "white",
-            border: "none",
-            padding: "5px 10px",
-            cursor: "pointer",
-          }}
-        >
-          Видалити
-        </button>
+        {userId == myUserId && (
+          <button
+            onClick={() => handleDelete(selectedImage)}
+            style={{
+              position: "absolute",
+              top: "10px",
+              right: "100px",
+              background: "red",
+              color: "white",
+              border: "none",
+              padding: "5px 10px",
+              cursor: "pointer",
+            }}
+          >
+            Видалити
+          </button>
+        )}
+
         <button
           onClick={closeModal}
           style={{

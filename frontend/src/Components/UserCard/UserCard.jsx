@@ -55,7 +55,7 @@ const UserCard = ({ user }) => {
       <Link to={`/profile/${user._id}`}>
         <div className="user-info">
           <div className="user-info-avatar">
-            <img src={BASE_URL + user.avatar} alt={user.userName} />
+            <img src={user.avatar} alt={user.userName} />
           </div>
           <span>{user.userName}</span>
         </div>

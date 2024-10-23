@@ -39,11 +39,10 @@ const UserProfile = () => {
   return (
     <div id="profile">
       <div className="profile_info">
-        <img
-          src={BASE_URL + user.avatar}
-          alt={user.userName}
-          className="profile_picture"
-        />
+        <div className="profile_picture">
+          <img src={user.avatar} alt={user.userName} />
+        </div>
+
         <div className="profile_info-content">
           <h3 className="profile_username">{user.userName}</h3>
           <div className="profile_personal">
