@@ -1,0 +1,55 @@
+#footer {
+  position: relative;
+  bottom: 0;
+  background-color: #f2b705;
+  width: 100%;
+}
+
+.footer-content {
+  display: flex;
+  padding: 50px 109px 15px 40px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#footer ul {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+#footer li {
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#footer .copyright {
+  text-align: center;
+  padding-bottom: 20px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.footer-logo {
+  width: 400px;
+}
+
+.footer-logo img {
+  width: 100%;
+  object-fit: contain;
+}
+
+.footer-logo h2 {
+  font-family: "Playwrite US Modern", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 64px;
+  height: inherit;
+  line-height: 115px;
+  text-align: center;
+}
+
+.footer-logo h2 span {
+  color: white;
+}

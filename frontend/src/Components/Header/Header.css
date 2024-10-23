@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+US+Modern:wght@100..400&display=swap');
+
+#header {
+	/* position: absolute; */
+	display: flex;
+	gap: 80px;
+	width: 100%;
+	flex-flow: row-reverse;
+}
+
+#header h2 {
+	font-family: "Playwrite US Modern", cursive;
+  font-optical-sizing: auto;
+	font-weight: 400;
+  font-style: normal;
+	font-size: 64px;
+	height: inherit;
+	line-height: 115px;
+}
+
+#header h2 span {
+	color: #F2D338;
+}
+
+.header_button-profile {
+	display: block;
+	background: url('../../images/icons/profile_icon.png');
+	width: 70px;
+	height: 100px;
+	background-position: center;
+	background-size: cover;
+}
+
+.header_button-settings {
+	display: block;
+	background: url('../../images/icons/settings_icon.png');
+	width: 100px;
+	height: 100px;
+	background-position: center;
+	background-size: cover;
+}
+
+#header ul {
+	display: flex;
+	align-items: center;
+	gap: 60px;
+}

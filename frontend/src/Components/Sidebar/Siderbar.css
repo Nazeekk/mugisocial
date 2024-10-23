@@ -1,0 +1,25 @@
+#sidebar {
+	width: 365px;
+}
+
+.sidebar_logo {
+	position: relative;
+	width: inherit;
+	z-index: 1;
+}
+
+.exit_button {
+margin-top: 140px;
+}
+
+#sidebar li:not(:first-child) {
+	margin-top: 15px;
+}
+
+#sidebar nav {
+	position: relative;
+	bottom: 80px;
+	background: #F2B705;
+	padding: 150px 20px 40px 20px;
+	z-index: 0;
+}

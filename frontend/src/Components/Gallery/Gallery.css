@@ -1,0 +1,16 @@
+.gallery_upload-button {
+	display: inline;
+	font-size: 16px;
+	padding: 5px;
+	margin: 0 !important;
+	margin-top: 5px !important;
+	width: auto;
+}
+
+.gallery_slider {
+	margin-top: 10px;
+}
+
+.gallery h2 {
+	margin-bottom: 20px;
+}

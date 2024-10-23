@@ -1,0 +1,104 @@
+.post {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.25);
+}
+
+.post_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.post_header button {
+  background: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+.post_info {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.post_profile-icon {
+  display: block;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.post_profile-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.post_username {
+  font-size: 24px;
+}
+
+.post_time {
+  font-size: 16px;
+  padding-top: 10px;
+}
+
+.post_text {
+  font-size: 18px;
+  padding-top: 25px;
+  line-height: 1.5;
+}
+
+.post_interact {
+  display: flex;
+  gap: 20px;
+  padding-top: 15px;
+}
+
+.post_interact-button {
+  width: 48px;
+  height: 48px;
+  border: 0;
+  background: 0;
+  align-items: center;
+}
+
+.post_interact-button:hover {
+  cursor: pointer;
+}
+
+.post_text-editing {
+  width: 100%;
+  margin-top: 25px;
+}
+
+.post_text-editing textarea {
+  font-size: 18px;
+  padding: 5px;
+  resize: none;
+  width: 100%;
+}
+
+.post_editing-button {
+  font-size: 16px;
+  margin: 0 !important;
+}
+
+.post_editing-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post_more-button {
+  background: 0;
+  border: 0;
+  font-size: 30px;
+  font-weight: 700;
+  color: #f29f05;
+  cursor: pointer;
+  writing-mode: vertical-lr;
+}

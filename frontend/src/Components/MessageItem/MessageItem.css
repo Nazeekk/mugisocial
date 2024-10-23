@@ -1,0 +1,61 @@
+.message {
+  max-width: 80%; /* Максимальна ширина для повідомлень */
+  margin-top: 15px; /* Центруємо повідомлення по горизонталі */
+  border-radius: 10px; /* Закруглені кути */
+  position: relative; /* Для позиціонування контекстного меню */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Легке тіньове відображення */
+  padding: 10px;
+  /* width: 80%; */
+  height: auto;
+  overflow-wrap: break-word;
+}
+
+.my-message {
+	display: block;
+  background-color: #f2d338; /* Синій для моїх повідомлень */
+  color: white; /* Білий текст */
+  align-self: flex-end;
+}
+
+.other-message {
+  background-color: #f1f1f1; /* Світло-сірий для отриманих повідомлень */
+  align-self: flex-start; /* Вирівнюємо ліворуч */
+  display: flex;
+}
+
+.message-content {
+  display: flex; /* Використовуємо флекс для розташування аватара і тексту */
+}
+
+.message-info {
+  display: flex; /* Використовуємо флекс для контейнера аватара і тексту */
+  align-items: flex-start; /* Вирівнюємо по верхньому краю */
+}
+
+.message-avatar {
+  margin-right: 10px; /* Відступ між аватаром і текстом */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.message-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.message-text {
+  max-width: 100%; /* Максимальна ширина тексту */
+  overflow-wrap: break-word; /* Перенос слів при переповненні */
+  word-wrap: break-word;
+  /* word-break: break-all; */
+}
+
+.message-time {
+  font-size: 0.8rem; /* Розмір шрифту для часу */
+  color: #666; /* Колір тексту для часу */
+  margin-top: 5px; /* Відступ між текстом і часом */
+  text-align: right;
+}

@@ -1,0 +1,33 @@
+.friends-requests .request {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.friends-requests .right-part,
+.friends-requests .left-part {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.friends-requests .right-part button {
+  font-size: 20px;
+}
+
+.friends-requests .avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.friends-requests .avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.friends-requests span {
+	font-size: 24px;
+}

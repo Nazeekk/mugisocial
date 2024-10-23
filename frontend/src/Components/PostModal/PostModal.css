@@ -1,0 +1,127 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8); /* Прозорий чорний фон */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  /* background-color: white; */
+  width: 90%;
+  height: 90%;
+  border-radius: 15px;
+  /* padding: 20px; */
+  overflow-y: auto;
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 3rem;
+  color: #F29F05;
+  cursor: pointer;
+}
+
+.modal .post {
+  width: 100%;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.25);
+	margin-top: 0 !important;
+}
+
+.modal .post_info {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.modal .post_profile-icon {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.modal .post_profile-icon img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+.modal .post_username {
+  font-size: 24px;
+}
+
+.modal .post_text {
+  font-size: 18px;
+  padding-top: 25px;
+  line-height: 1.5;
+}
+
+.modal .comments-section {
+  padding-top: 20px;
+}
+.modal .comment_user-info {
+  display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.modal .comment_profile-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.modal .comment_profile-icon img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+.modal .comment-content {
+	padding-top: 10px;
+}
+
+.modal h2 {
+	padding-top: 60px;
+}
+
+.modal form {
+	display: flex;
+	margin-top: 10px;
+	gap: 20px;
+	align-items: center;
+}
+
+.modal form textarea {
+	width: 100%;
+	padding: 5px;
+	resize: none;
+	height: 80px;
+	outline: none;
+	border: 0;
+	box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.25);
+}
+
+.modal form button {
+	font-size: 16px;
+}
+
+.modal .comment {
+	margin-top: 40px;
+	box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+	padding: 20px;
+}

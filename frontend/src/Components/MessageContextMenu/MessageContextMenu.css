@@ -1,0 +1,21 @@
+.context-menu {
+  /* Ці стилі вже є в Inline стилях в компоненті, але ви можете їх додати до CSS */
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  padding: 5px;
+	position: relative;
+}
+.context-menu button {
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: #007bff; /* Основний колір кнопки */
+  color: white; /* Колір тексту */
+  border: none; /* Без рамки */
+  border-radius: 4px; /* Закруглені кути */
+}
+.context-menu button:hover {
+  background-color: #0056b3; /* Темніший колір при наведенні */
+}

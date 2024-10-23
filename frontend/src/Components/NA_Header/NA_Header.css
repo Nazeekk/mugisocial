@@ -1,0 +1,18 @@
+#na_header .header_logo {
+  width: 100%;
+}
+
+#na_header h1 {
+  font-family: "Playwrite US Modern", cursive;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 96px;
+  height: inherit;
+  line-height: 115px;
+}
+
+#na_header h1 span {
+  color: #f2d338;
+  line-height: 1.8;
+}

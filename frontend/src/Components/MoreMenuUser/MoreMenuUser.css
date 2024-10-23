@@ -1,0 +1,44 @@
+.more-menu-user {
+  position: absolute;
+  top: 30px; /* Відстань від кнопки "•••" */
+  right: 0; /* Вирівнювання по правій стороні контейнера */
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 150px; /* Ширина меню */
+  padding: 10px 0;
+}
+
+.more-menu-user button {
+  display: block;
+  width: 100%;
+  padding: 10px 15px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+
+.more-menu-user button:hover {
+  background-color: #f7f7f7; /* Колір при наведенні */
+}
+
+.more-menu-user button:focus {
+  outline: none;
+}
+
+.more-menu-user .button-add {
+  border-bottom: 1px solid #e5e5e5; /* Роздільник між кнопками */
+}
+
+.more-menu-user .button-delete {
+  color: #e74c3c; /* Червоний колір для кнопки "Видалити" */
+}
+
+.more-menu-user .button-delete:hover {
+  background-color: #fbeaea; /* Світліший червоний фон при наведенні */
+}
