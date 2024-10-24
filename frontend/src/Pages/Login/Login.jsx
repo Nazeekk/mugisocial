@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { Link } from "react-router-dom";
-import NA_Header from "../../Components/NA_Header/NA_Header";
+import NAHeader from "../../Components/NAHeader/NAHeader";
 import axios from "axios";
 
 const Login = () => {
@@ -9,18 +9,19 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
 
-	const BASE_URL = process.env.REACT_APP_BASE_URL
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   const handleLogin = async (e) => {
     e.preventDefault();
-		console.log(BASE_URL)
+    console.log(BASE_URL);
     try {
-      const response = await axios.post(
-        BASE_URL + "/api/auth/login",
-        { email, password }
-      );
+      const response = await axios.post(BASE_URL + "/api/auth/login", {
+        email,
+        password,
+      });
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("userId", response.data.userId);
+      if (response.data.isAdmin) localStorage.setItem("isAdmin", true);
       window.location.href = "/";
     } catch (error) {
       setMessage(error.response.data.message);
@@ -30,7 +31,7 @@ const Login = () => {
 
   return (
     <div className="auth">
-      <NA_Header />
+      <NAHeader />
       <form onSubmit={handleLogin} className="auth-form">
         <input
           type="email"

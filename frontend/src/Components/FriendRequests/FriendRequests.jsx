@@ -27,7 +27,7 @@ const FriendRequests = () => {
       }
     };
     fetchFriendRequests();
-  }, [token]);
+  }, [token, userId, BASE_URL]);
 
   const acceptRequest = async (requestId) => {
     try {
@@ -69,13 +69,13 @@ const FriendRequests = () => {
     <div className="friends-requests">
       <h2>Запити на дружбу</h2>
       <ul>
-        {friendRequests.length == 0 && <h3>Запитів на дружбу не знайдено</h3>}
+        {friendRequests.length === 0 && <h3>Запитів на дружбу не знайдено</h3>}
         {friendRequests.map((request) => (
           <li key={request._id}>
             <div className="request">
               <Link to={`/profile/${request._id}`} className="left-part">
                 <div className="avatar">
-                  <img src={BASE_URL + request.avatar} alt={request.userName} />
+                  <img src={request.avatar} alt={request.userName} />
                 </div>
                 <span>{request.userName}</span>
               </Link>

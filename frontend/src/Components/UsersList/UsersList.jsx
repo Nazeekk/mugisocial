@@ -22,14 +22,16 @@ const UsersList = () => {
 
         const allUsers = response.data;
 
-        const filteredUsers = allUsers.filter((user) => user._id !== userId);
+        const filteredUsers = allUsers.filter(
+          (user) => user._id !== userId && user.isVerified
+        );
         setUsers(filteredUsers);
       } catch (error) {
         console.error("Error fetching users:", error);
       }
     };
     fetchUsers();
-  }, []);
+  }, [token, userId, BASE_URL]);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value); // Оновлюємо термін пошуку при введенні

@@ -1,13 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const path = require("path");
 const connectDB = require("./db");
 const userRoutes = require("./routes/userRoutes");
 const postRoutes = require("./routes/postRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 const chatRoomRoutes = require("./routes/chatRoomRoutes");
 const authRoutes = require("./routes/authRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 const http = require("http");
 const socketIo = require("socket.io");
 const crypto = require("crypto");
@@ -45,6 +45,7 @@ app.use("/api/posts", postRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/chats", chatRoomRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/admin", adminRoutes);
 
 const encryptionKey = process.env.ENCRYPTION_KEY; // 32 байти для AES-256
 const iv = crypto.randomBytes(16); // 16 байтів для IV

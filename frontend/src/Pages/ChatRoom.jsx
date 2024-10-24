@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import axios from "axios";
 import MessageItem from "../Components/MessageItem/MessageItem";
 import io from "socket.io-client";
@@ -27,7 +27,7 @@ const ChatRoom = () => {
     }
   };
 
-  const fetchChatInfo = async () => {
+  const fetchChatInfo = useCallback(async () => {
     try {
       const response = await axios.get(`${BASE_URL}/api/chats/${userId}`, {
         headers: {
@@ -39,7 +39,7 @@ const ChatRoom = () => {
     } catch (error) {
       console.error("Помилка при отриманні даних чату:", error);
     }
-  };
+  }, [BASE_URL, userId, token]);
 
   const sendMessage = () => {
     if (newMessage.trim() !== "") {
@@ -89,7 +89,7 @@ const ChatRoom = () => {
       socket.off("loadMessages");
       socket.off("receiveMessage");
     };
-  }, [myUserId, userId, socket]);
+  }, [myUserId, userId, BASE_URL, fetchChatInfo]);
 
   return (
     <div className="chat-room">

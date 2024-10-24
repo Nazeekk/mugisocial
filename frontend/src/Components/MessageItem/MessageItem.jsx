@@ -17,7 +17,7 @@ const MessageItem = ({ message, onDelete }) => {
   };
 
   const handleContextMenu = (event) => {
-    if (userId != message.senderId._id) return;
+    if (userId !== message.senderId._id) return;
     event.preventDefault(); // Запобігаємо стандартному контекстному меню
     setShowMenu(true);
   };
@@ -40,13 +40,13 @@ const MessageItem = ({ message, onDelete }) => {
   return (
     <div
       className={
-        userId == message.senderId._id
+        userId === message.senderId._id
           ? "message my-message"
           : "message other-message"
       }
       onContextMenu={handleContextMenu}
     >
-      {userId != message.senderId._id && (
+      {userId !== message.senderId._id && (
         <div className="message-content">
           <div className="message-info">
             <div className="message-avatar">

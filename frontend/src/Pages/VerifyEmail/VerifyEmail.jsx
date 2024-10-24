@@ -22,7 +22,7 @@ const VerifyEmail = () => {
           console.error("Error verifying email:", error);
         });
     }
-  }, [navigate, searchParams]);
+  }, [navigate, searchParams, BASE_URL]);
 
   return (
     <div>

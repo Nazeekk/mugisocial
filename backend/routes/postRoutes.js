@@ -191,9 +191,7 @@ router.delete("/:postId", auth, async (req, res) => {
 
     // Перевірка, чи користувач є автором поста
     if (post.userId.toString() !== userId) {
-      return res
-        .status(403)
-        .json({ message: "Ви не є автором цього поста" });
+      return res.status(403).json({ message: "Ви не є автором цього поста" });
     }
 
     // Видалення поста

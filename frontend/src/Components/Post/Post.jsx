@@ -15,6 +15,8 @@ const Post = ({ post, fetchPosts }) => {
 
   const token = localStorage.getItem("token");
   const myUserId = localStorage.getItem("userId");
+  const amIAdmin = localStorage.getItem("isAdmin");
+
   const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   const toggleLike = async () => {
@@ -38,11 +40,16 @@ const Post = ({ post, fetchPosts }) => {
   const handleDelete = async () => {
     if (window.confirm("Ви дійсно хочете видалити цей пост?")) {
       try {
-        await axios.delete(`${BASE_URL}/api/posts/${post._id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        await axios.delete(
+          amIAdmin
+            ? `${BASE_URL}/api/admin/posts/${post._id}`
+            : `${BASE_URL}/api/posts/${post._id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         fetchPosts(); // Оновлюємо пости після видалення
       } catch (error) {
         console.error("Error deleting post:", error);
@@ -93,7 +100,7 @@ const Post = ({ post, fetchPosts }) => {
       <div className="post_header">
         <div className="post_info">
           <div className="post_profile-icon">
-            <img src={post.userId.avatar} />
+            <img src={post.userId.avatar} alt={post.userId.userName} />
           </div>
           <div>
             <h3 className="post_username">{post.userId.userName}</h3>
@@ -111,7 +118,7 @@ const Post = ({ post, fetchPosts }) => {
             </time>
           </div>
         </div>
-        {myUserId == post.userId._id && (
+        {(myUserId === post.userId._id || amIAdmin) && (
           <button
             className="post_more-button"
             onClick={() => setShowMoreMenu(!showMoreMenu)}
@@ -161,6 +168,7 @@ const Post = ({ post, fetchPosts }) => {
           className="post_like-button post_interact-button"
         >
           <LikeIcon isLiked={post.likedBy.includes(myUserId)} />
+          {post.likes !== 0 && <span>{post.likes}</span>}
         </button>
 
         <button

@@ -9,7 +9,7 @@ import { Navigate } from "react-router-dom";
 const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
   const [user, setUser] = useState({
     userName: "",
     bio: "",
@@ -44,7 +44,7 @@ const Profile = () => {
     };
 
     fetchUser();
-  }, [token]);
+  }, [token, BASE_URL]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -82,11 +82,11 @@ const Profile = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      setMessage("Profile updated successfully");
+      // setMessage("Profile updated successfully");
       setIsEditing(false); // Після збереження вихід з режиму редагування
     } catch (error) {
       console.error("Error updating profile:", error);
-      setMessage("Failed to update profile");
+      // setMessage("Failed to update profile");
     }
   };
 

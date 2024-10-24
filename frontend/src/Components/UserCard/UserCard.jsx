@@ -7,11 +7,12 @@ import { Link } from "react-router-dom";
 const UserCard = ({ user }) => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
   const [showMoreMenu, setShowMoreMenu] = useState(false);
-  const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
   const moreMenuRef = useRef(null);
 
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
+  const amIAdmin = localStorage.getItem("isAdmin");
 
   const handleAdd = async () => {
     try {
@@ -50,6 +51,26 @@ const UserCard = ({ user }) => {
     }
   };
 
+  const handleDeleteUser = async () => {
+    if (window.confirm("Ви дійсно хочете видалити цього користувача?")) {
+      try {
+        const response = await axios.delete(
+          `${BASE_URL}/api/admin/user/${user._id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        alert(response.data.message);
+      } catch (error) {
+        alert(error.response.data.message);
+        console.error("Помилка видалення користувача:", error);
+      }
+    }
+  };
+
   return (
     <li key={user._id} className="user-card">
       <Link to={`/profile/${user._id}`}>
@@ -80,7 +101,9 @@ const UserCard = ({ user }) => {
             onDelete={handleDelete}
             onAdd={handleAdd}
             onClose={() => setShowMoreMenu(false)}
+            onDeleteUser={handleDeleteUser}
             isFriend={user.friends.includes(userId)}
+            amIAdmin={amIAdmin}
           />
         )}
       </div>

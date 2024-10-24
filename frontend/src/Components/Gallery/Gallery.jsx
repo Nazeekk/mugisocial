@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./Gallery.css";
 import Slider from "react-slick";
 import axios from "axios";
@@ -15,17 +15,23 @@ const Gallery = ({ userId }) => {
 
   const token = localStorage.getItem("token");
   const myUserId = localStorage.getItem("userId");
+  const amIAdmin = localStorage.getItem("isAdmin");
 
   const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   const handleDelete = async (image) => {
     try {
-      await axios.delete(BASE_URL + "/api/users/delete-media", {
-        data: { image },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axios.delete(
+        amIAdmin
+          ? BASE_URL + "/api/users/delete-media"
+          : `${BASE_URL}/api/admin/delete-media/${userId}`,
+        {
+          data: { image },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       fetchMedia();
     } catch (error) {
       console.error("Error deleting media:", error);
@@ -54,7 +60,7 @@ const Gallery = ({ userId }) => {
     }
   };
 
-  const fetchMedia = async () => {
+  const fetchMedia = useCallback(async () => {
     try {
       const response = await axios.get(
         `${BASE_URL}/api/users/media/${userId}`,
@@ -69,7 +75,7 @@ const Gallery = ({ userId }) => {
     } catch (error) {
       console.error("Error fetching media:", error);
     }
-  };
+  }, [userId, token, BASE_URL]);
 
   const openModal = (image) => {
     setSelectedImage(image);
@@ -83,7 +89,7 @@ const Gallery = ({ userId }) => {
 
   useEffect(() => {
     fetchMedia();
-  }, []);
+  }, [fetchMedia]);
 
   const settings = {
     dots: true,
@@ -199,7 +205,7 @@ const Gallery = ({ userId }) => {
             />
           </div>
         )}
-        {userId == myUserId && (
+        {(userId === myUserId || amIAdmin) && (
           <button
             onClick={() => handleDelete(selectedImage)}
             style={{

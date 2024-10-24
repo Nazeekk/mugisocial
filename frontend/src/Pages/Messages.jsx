@@ -22,7 +22,7 @@ const Messages = () => {
       }
     };
     fetchChats();
-  }, []);
+  }, [token, BASE_URL]);
 
   return (
     <div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NA_Header from "../../Components/NA_Header/NA_Header";
+import NAHeader from "../../Components/NAHeader/NAHeader";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -35,7 +35,7 @@ const Register = () => {
 
   return (
     <div className="auth">
-      <NA_Header />
+      <NAHeader />
       <form onSubmit={handleRegister} className="auth-form">
         <input
           type="text"

@@ -11,6 +11,7 @@ const UserProfile = () => {
   const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   const token = localStorage.getItem("token");
+  const amIAdmin = localStorage.getItem("isAdmin");
 
   const { userId } = useParams();
 
@@ -24,14 +25,33 @@ const UserProfile = () => {
         });
         setUser(response.data);
       } catch (error) {
-        console.error("Помилка при отриманні користувача:", error);
+        console.error("Помилка при отриманні користувача: ", error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchUser();
-  }, [userId]);
+  }, [token, userId, BASE_URL]);
+
+  const handleDeleteAvatar = async (e) => {
+    e.preventDefault();
+    if (
+      window.confirm(
+        "Ви впевнені, що хочете видалити аватар цього користувача?"
+      )
+    ) {
+      try {
+        await axios.delete(`${BASE_URL}/api/admin/delete-avatar/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      } catch (error) {
+        console.error("Помилка видалення аватару користувача: ", error);
+      }
+    }
+  };
 
   if (loading) return <div>Завантаження...</div>;
   if (!user) return <div>Користувача не знайдено</div>;
@@ -41,6 +61,14 @@ const UserProfile = () => {
       <div className="profile_info">
         <div className="profile_picture">
           <img src={user.avatar} alt={user.userName} />
+          {amIAdmin && (
+            <button
+              onClick={handleDeleteAvatar}
+              style={{ color: "red", padding: "5px" }}
+            >
+              Видалити аватар
+            </button>
+          )}
         </div>
 
         <div className="profile_info-content">

@@ -1,8 +1,8 @@
 import React from "react";
-import "./NA_Header.css";
+import "./NAHeader.css";
 import logo from "../../images/logo.png";
 
-const NA_Header = () => {
+const NAHeader = () => {
   return (
     <header id="na_header">
       <img src={logo} alt="" className="header_logo" />
@@ -13,4 +13,4 @@ const NA_Header = () => {
   );
 };
 
-export default NA_Header;
+export default NAHeader;

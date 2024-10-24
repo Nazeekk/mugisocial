@@ -5,8 +5,6 @@ const auth = require("../middleware/auth");
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
-const path = require("path");
-const fs = require("fs");
 const {
   getUserProfile,
   updateUserProfile,
@@ -23,7 +21,7 @@ router.get("/users", auth, async (req, res) => {
       userName: { $regex: search, $options: "i" }, // Регістронезалежний пошук
     })
       .sort({ createdAt: -1 }) // Сортування за датою реєстрації (в порядку спадання)
-      .select("userName avatar createdAt friends"); // Повертаємо лише необхідні поля
+      .select("userName avatar createdAt friends isVerified"); // Повертаємо лише необхідні поля
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ message: "Помилка при отриманні користувачів" });
@@ -45,7 +43,6 @@ const avatarStorage = new CloudinaryStorage({
   params: {
     folder: "avatars", // Папка на Cloudinary
     format: async (req, file) => "png", // Вказати формат файлу
-    public_id: (req, file) => `${Date.now()}-${file.originalname}`,
   },
 });
 
@@ -54,7 +51,6 @@ const mediaStorage = new CloudinaryStorage({
   params: {
     folder: "media", // Папка на Cloudinary
     format: async (req, file) => "png",
-    public_id: (req, file) => `${Date.now()}-${file.originalname}`,
   },
 });
 
@@ -70,10 +66,19 @@ router.patch(
     try {
       const userId = req.user.userId; // Отримуємо ID користувача з токена
 
+      const currentAvatar = (await User.findById(req.user.userId)).avatar;
+
+      const publicId = currentAvatar.split("/").pop().split(".")[0]; // Отримуємо public_id для файлу
+      cloudinary.uploader.destroy(`avatars/${publicId}`, (err, result) => {
+        if (err) {
+          console.error(err);
+        }
+      });
+
       const avatarUrl = req.file.path;
 
       // Оновлюємо поле аватара в профілі користувача
-      const user = await User.findByIdAndUpdate(
+      await User.findByIdAndUpdate(
         userId,
         { avatar: avatarUrl },
         { new: true }
@@ -166,27 +171,6 @@ router.delete("/delete-media", auth, async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Помилка сервера" });
-  }
-});
-
-router.delete("/:userId", auth, async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
-
-    if (!user) {
-      return res.status(404).json({ message: "Користувача не знайдено" });
-    }
-
-    if (req.user.userId !== user._id && !req.user.isAdmin) {
-      return res
-        .status(403)
-        .json({ message: "Недостатньо прав для видалення цього користувача" });
-    }
-
-    await user.remove(); // Видаляємо користувача з бази даних
-    res.json({ message: "Користувача успішно видалено" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
   }
 });
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import CreatePost from "../CreatePost/CreatePost";
 import "./PostsList.css";
@@ -11,7 +11,7 @@ const PostsList = ({ userId, isMainPage = false }) => {
 
   const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     try {
       const response = await axios.get(
         isMainPage
@@ -27,11 +27,11 @@ const PostsList = ({ userId, isMainPage = false }) => {
     } catch (error) {
       console.error("Error fetching posts:", error);
     }
-  };
+  }, [myUserId, userId, token, BASE_URL, isMainPage]);
 
   useEffect(() => {
     fetchPosts();
-  }, []);
+  }, [fetchPosts]);
 
   return (
     <div className="posts-list">

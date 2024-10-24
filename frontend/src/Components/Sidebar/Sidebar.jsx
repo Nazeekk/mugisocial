@@ -1,15 +1,12 @@
 import React from "react";
 import logo from "../../images/logo.png";
 import "./Siderbar.css";
-import { useNavigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Sidebar() {
-  const navigate = useNavigate();
-
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
-    navigate("/login");
   };
 
   return (
@@ -34,9 +31,9 @@ function Sidebar() {
               </NavLink>
             </li>
             <li>
-              <a className="exit_button button_primary" onClick={handleLogout}>
+              <NavLink to="/login" className="exit_button button_primary" onClick={handleLogout}>
                 Вихід
-              </a>
+              </NavLink>
             </li>
           </ul>
         </nav>

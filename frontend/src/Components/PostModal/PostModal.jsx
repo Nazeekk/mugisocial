@@ -30,7 +30,7 @@ const PostModal = ({ post, onClose }) => {
     };
 
     fetchComments();
-  }, [post._id]);
+  }, [post._id, token, BASE_URL]);
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
